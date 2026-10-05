@@ -205,6 +205,7 @@ NT.forEach(n=>{const fi=P.map((p,i)=>p.r?-1:i).filter(i=>i>=0),lo=Math.min(2,fi.
 const bg=p=>p.img?`url(${p.img}) center/cover`:p.g,fc=p=>p.img?"":p.e;
 function pv(p){return `<div class="img" style="background:${bg(p)}">${fc(p)}${p.r?'<span class="rl">▶ 릴스</span>':''}${p.img?'':`<small>${p.t}</small>`}</div>`}
 const av=(c,z)=>`<div class="av" style="background:url(${c.img}) center/cover;${z?`width:${z}px;height:${z}px;font-size:${z/2}px`:''}"></div>`;
+let RV="";
 function render(){
  const un=Object.values(S.un).reduce((a,b)=>a+b,0),v=S.view;let h="";
  if(v==="chat"){const k=S.cur,c=C[k],L=S.chat[k];
@@ -232,7 +233,7 @@ function render(){
    <div class="sec2" style="margin:22px 0 8px">ℹ️ 안내</div><div class="note"><p>본 게임은 「온더훅」의 비공식 2차 창작 팬게임입니다. 원작자 및 관련 권리자와 무관하게 개인이 비영리 목적으로 제작하였으며, 원작의 공식 콘텐츠가 아닙니다.</p><p>「온더훅」의 캐릭터, 명칭, 설정, 이미지 등 원작에 관한 저작권 및 모든 관련 권리는 원작자인 팀 그라목손에게 있습니다.</p><p>‘Onstagram(온스타그램)’은 가상의 서비스이며, Instagram 및 Meta Platforms, Inc.와 아무런 관련이 없습니다. Instagram은 Meta Platforms, Inc.의 상표입니다.</p><p>게시물에 사용된 사진은 Pixabay, Pexels에서 제공하는 무료 이미지이며, 사진 속 게임·제품·브랜드의 상표 및 저작권은 각 권리자에게 있습니다.</p><p>본 게임으로 어떠한 수익도 얻지 않으며, 권리자의 요청이 있을 경우 즉시 수정 또는 삭제하겠습니다.</p><p>문의: X(구 트위터) <a href="https://x.com/2oumgi" target="_blank" rel="noopener">@2oumgi</a></p></div></div></main>`}}
  if(S.sheet){const p=P.find(x=>x.id===S.sheet);h+=`<div class="sheet" onclick="closeSheet()"><div onclick="event.stopPropagation()" style="max-height:80%;overflow-y:auto"><h4>공유 · ${p.t}</h4>${K.map(k=>`<div class="who" onclick="share(${p.id},'${k}')">${av(C[k],44)}<b>${C[k].n}</b><button>보내기</button></div>`).join("")}</div></div>`}
  if(S.toast)h+=`<div class="toast">${S.toast}</div>`;
- $.innerHTML=h;const m=document.getElementById("msgs");if(m)m.scrollTop=m.scrollHeight;
+ const om=$.querySelector("main"),st=om?om.scrollTop:0;$.innerHTML=h;const m=document.getElementById("msgs");if(m)m.scrollTop=m.scrollHeight;const nm=$.querySelector("main");if(nm&&om&&RV===S.view)nm.scrollTop=st;RV=S.view;
 }
 function go(v){S.view=v;render()}
 function like(i){S.liked[i]=!S.liked[i];render()}
