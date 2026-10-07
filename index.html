@@ -419,10 +419,10 @@ k:{u:"comma_room",e:"🖥️",g:"linear-gradient(135deg,#232526,#4b6cb7)",t:"새
 const pickPre=k=>{const a=PRE[k],n=a.length;if(n<2)return a[0];const l=S.pl[k]==null?-1:S.pl[k],i=(l+1+(Math.random()*(n-1)|0))%n;S.pl[k]=i;return a[i]};
 function pick(k){const n=C[k].daily.length,h=S.hist[k],pool=[...Array(n).keys()].filter(i=>!h.slice(-2).includes(i)),i=pool[Math.random()*pool.length|0];h.push(i);return i}
 function tick(){const now=Date.now(),c=KV().filter(k=>!S.busy[k]&&!S.un[k]&&!(S.view==="chat"&&S.cur===k)&&now-(S.last[k]||0)>90000);
- if(c.length){const pool=c.filter(k=>pendEv(k,"pre")),pp=pool.length?pool:c,k=pp[Math.random()*pp.length|0];S.last[k]=now;S.busy[k]=1;const ev=pendEv(k,"pre");
+ if(c.length){const pool=c.filter(k=>pendEv(k,"pre")||(!S.hid[k]&&S.aff[k]>=50)),pp=pool.length?pool:c,k=pp[Math.random()*pp.length|0];S.last[k]=now;S.busy[k]=1;const ev=pendEv(k,"pre");
     setTimeout(()=>{let t;
    if(ev){runEv(k,ev);toast("💬 "+C[k].n+": 새 메시지");return}
-   if(!S.hid[k]&&S.aff[k]>=50&&Math.random()<.5){S.hid[k]=1;t=say(k,HID[k].intro);setTimeout(()=>{push(k,{p:HID[k],them:1,hk:k});add(k,2);hr(k);S.busy[k]=0;render()},t)}
+   if(!S.hid[k]&&S.aff[k]>=50){S.hid[k]=1;t=say(k,HID[k].intro);setTimeout(()=>{push(k,{p:HID[k],them:1,hk:k});add(k,2);hr(k);S.busy[k]=0;render()},t)}
    else{t=say(k,pickPre(k));setTimeout(()=>{hr(k);S.busy[k]=0;render()},t)}
    toast("💬 "+C[k].n+": 새 메시지")},3000)}
  setTimeout(tick,15000+Math.random()*20000)}
@@ -455,7 +455,7 @@ function reqList(){let h="";if(!S.joined)h+=rqc("i","sari_pari님이 친구 추�
  K.filter(k=>S.blocked[k]).forEach(k=>{const ls=k==="s"?bqLines():[];h+=rqc(k,ls.length?`<b style="color:var(--fg)">새 메세지 ${ls.length}개+</b><br>${fmt(ls[ls.length-1].t)}`:"차단한 계정",`<button class="ok" onclick="reAdd('${k}')">친구 추가</button>`)});
  return h||'<div style="padding:40px 20px;text-align:center;color:var(--sub)">새로운 요청이 없어요</div>'}
 function dmTab(t){S.dmTab=t;render()}
-function acceptReq(){if(S.joined)return;S.joined=1;S.dmTab="msg";S.ts.i=Date.now();S.act.i=0;saveGameState();toast("이사리와 친구가 됐어요");openChat("i")}
+function acceptReq(){if(S.joined)return;S.joined=1;S.dmTab="msg";S.ts.i=Date.now();S.act.i=0;saveGameState();toast("이사리와 친구가 됐어요 🌷");openChat("i")}
 D.i={game:3,cat:3,music:1,magic:-1};
 R.i={hi:"엣|이거 진짜 좋아해요!!|{n}님 짱짱! =v=",mid:"오오|한번 봐볼게요!",lo:"으음~|잘 모르겠어요 ;-;"};
 PRE.i=["저… 최근에 감자튀김을 먹어봤어요…|너무 맛있다!! ㅎㅎ","요즘 뭔가|토마토가 유행인가봐요…|소품샵에… 토마토가 가득…|홍시 유행은 안 오려나 ㅎ-ㅎ","{n}님 {n}님!|음|으음…|할 말을 까먹었어요.. ;-;"];
