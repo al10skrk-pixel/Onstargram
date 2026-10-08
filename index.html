@@ -107,6 +107,7 @@ header .back{color:#fff;font-size:34px;line-height:1}
 .typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
 @keyframes bl{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
 .cp main{padding:0}.cp header .mn{background:none;border:0;color:#fff;font-size:22px;cursor:pointer}.cp1{display:flex;align-items:center;gap:20px;padding:16px}.cp1 .st{flex:1;display:flex;justify-content:space-around;text-align:center;font-size:13px}.cp1 .st b{display:block;font-size:17px}.cp2{padding:0 16px;font-size:14px}.cp3{display:flex;align-items:center;gap:8px;padding:12px 16px;font-size:12.5px}.stk{display:flex}.stk .av{border:2px solid var(--bg,#fff);margin-left:-8px}.stk .av:first-child{margin-left:0}.stk .av.me{width:26px;height:26px;display:grid;place-items:center;font-size:14px;background:var(--them)}.cp4{display:flex;gap:6px;padding:0 16px 14px}.cp4 button{flex:1;border:0;border-radius:8px;padding:9px;font-weight:600;font-size:13px;background:var(--them);color:var(--fg);cursor:pointer}.cp4 .bl{flex:.6;color:#e5303c}.cp5{border-bottom:1px solid var(--line);text-align:center;padding:8px;font-size:20px}.cp .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}.cp .gc{aspect-ratio:1;display:grid;place-items:center;font-size:40px;position:relative}.cp .gc small{position:absolute;bottom:4px;font-size:10px;color:#fff}.cp .emp{text-align:center;padding:70px 0;color:var(--fg)}.cp .emp .ci{width:64px;height:64px;border:2px solid var(--fg);border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-size:28px}
+.m.ph{align-self:flex-end;width:220px;height:165px;padding:0;overflow:hidden;display:grid;place-items:center;font-size:32px;border:1px solid var(--line);background-color:var(--them)}
 .dlg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;z-index:80}.dlg .bx{background:var(--bg,#fff);color:var(--fg);border-radius:14px;padding:20px;width:78%;max-width:320px;text-align:center}.dlg p{font-size:13px;color:var(--sub);margin:8px 0 16px}.dlg .bx div{display:flex;gap:8px}.dlg button{flex:1;border:0;border-radius:8px;padding:10px;font-weight:700;background:var(--them);color:var(--fg);cursor:pointer}.dlg .ok{background:#e5303c;color:#fff}.rdot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff3040;margin-left:4px;vertical-align:top}.sec3 span,.sec3 b{cursor:pointer}.sec3 .off{color:var(--sub);font-weight:400}.rq{display:flex;gap:12px;align-items:center;padding:14px;border-bottom:1px solid var(--line)}.rq .av{width:56px;height:56px}.rq .t{flex:1;min-width:0}.rq .l{color:var(--sub);font-size:13px;margin-top:2px}.rq .bt{display:flex;gap:6px}.rq .bt button{border:0;border-radius:8px;padding:7px 12px;font-weight:600;cursor:pointer;background:var(--them);color:var(--fg)}.rq .bt .ok{background:var(--me);color:#fff}
 .sec3{display:flex;justify-content:space-between;padding:8px 16px;color:var(--sub)}.sec3 b{color:var(--fg);font-size:16px}
 .dv{border:0;border-top:1px solid var(--line);margin:10px 0;align-self:stretch;width:100%}
@@ -115,7 +116,7 @@ header .back{color:#fff;font-size:34px;line-height:1}
 #splash .sl{font:700 56px "Dancing Script","Snell Roundhand","Brush Script MT",cursive;flex:1;display:flex;align-items:center}
 #splash .sn{font-size:12px;line-height:1.7;text-align:center;opacity:.92}
 .note p{margin-bottom:10px}.note{font-size:13px;line-height:1.7;color:var(--sub)}.note a{color:var(--teal);font-weight:600}
-.bar.ch{flex-direction:column}.bar.ch button{width:100%;padding:11px;border-radius:8px;background:var(--bg)!important;color:var(--teal);border:1px solid var(--teal)}
+.bar.ch{flex-direction:column;align-items:center;gap:14px;padding:16px 10px 22px;border-top:0;max-height:48%;overflow-y:auto;flex-shrink:0}.bar.ch button{width:auto;min-width:64px;padding:14px 22px;border-radius:8px!important;background:color-mix(in srgb,var(--teal,#6ec6c4) 55%,#fff)!important;color:#fff;border:0;font-size:15px}
 </style></head>
 <body><div id="app"></div>
 <div id="splash"><div class="sl">Onstagram</div><div class="sn">본 게임은 「온더훅」의 비공식 2차 창작 팬게임입니다.<br>원작자 및 관련 권리자와 무관하게 개인이 제작하였으며,<br>원작의 공식 콘텐츠가 아닙니다.<br>원작의 저작권 및 관련 권리는 팀 그라목손에게 있습니다.</div></div>
@@ -198,7 +199,7 @@ C.b={n:"배추민",e:"🥬",g:"#bfe6c0",st:"",hi:"",daily:[["뭐해요?","공부
 IMG.b="data:image/jpeg;base64,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";
 const K=Object.keys(C),RQ={i:"joined",b:"jb"},KV=()=>K.filter(k=>(!RQ[k]||S[RQ[k]])&&!S.blocked[k]),Z=v=>Object.fromEntries(K.map(k=>[k,v()]));
 K.forEach(k=>C[k].img=IMG[k]);
-const S={aff:Z(()=>10),chat:Z(()=>[]),un:Z(()=>0),sent:{},di:Z(()=>0),act:{s:6,m:1,d:3,r:2,l:5,c:4,x:8,k:11,i:7,b:9},busy:{},ts:{},hid:{},ev:{},choice:null,last:{},hist:Z(()=>[]),liked:{},joined:0,jb:0,blocked:{},pl:{},dmTab:"msg",view:"feed",set:{name:"주인공",theme:"default",delay:4},cur:null,sheet:null,toast:""};
+const S={aff:Z(()=>10),chat:Z(()=>[]),un:Z(()=>0),sent:{},di:Z(()=>0),act:{s:6,m:1,d:3,r:2,l:5,c:4,x:8,k:11,i:7,b:9},busy:{},ts:{},hid:{},ev:{},choice:null,last:{},hist:Z(()=>[]),liked:{},joined:0,jb:0,x:{},blocked:{},pl:{},dmTab:"msg",view:"feed",set:{name:"주인공",theme:"default",delay:4},cur:null,sheet:null,toast:""};
 
 // GitHub Pages에서도 새로고침 후 게임 진행/대화가 유지되도록 브라우저에 저장합니다.
 const SAVE_KEY="onstagram_save_v1";
@@ -209,7 +210,7 @@ function saveGameState(){
  try{
   localStorage.setItem(SAVE_KEY,JSON.stringify({
    aff:S.aff,chat:slimChat(),un:S.un,sent:S.sent,di:S.di,act:S.act,
-   joined:S.joined,jb:S.jb,blocked:S.blocked,pl:S.pl,ts:S.ts,hid:S.hid,last:S.last,hist:S.hist,liked:S.liked,ev:S.ev,set:S.set
+   joined:S.joined,jb:S.jb,x:S.x,blocked:S.blocked,pl:S.pl,ts:S.ts,hid:S.hid,last:S.last,hist:S.hist,liked:S.liked,ev:S.ev,set:S.set
   }));
  }catch(e){console.warn("게임 저장 실패",e)}
 }
@@ -231,7 +232,7 @@ function loadGameState(){
   if(d.hist)S.hist=ZK(k=>Array.isArray(d.hist[k])?d.hist[k]:[]);
   if(d.liked&&typeof d.liked==="object")S.liked=d.liked;
   if(d.ev&&typeof d.ev==="object")S.ev=d.ev;
-  S.joined=d.joined?1:0;S.jb=d.jb?1:0;if(d.blocked&&typeof d.blocked==="object")S.blocked=d.blocked;if(d.pl&&typeof d.pl==="object")S.pl=d.pl;
+  S.joined=d.joined?1:0;S.jb=d.jb?1:0;if(d.x&&typeof d.x==="object")S.x=d.x;if(d.blocked&&typeof d.blocked==="object")S.blocked=d.blocked;if(d.pl&&typeof d.pl==="object")S.pl=d.pl;
   if(d.set&&typeof d.set==="object")S.set={...S.set,...d.set};
  }catch(e){console.warn("저장 데이터 불러오기 실패",e)}
  // 진행 중이던 자동 메시지/타이핑 상태는 새로고침 시 초기화합니다.
@@ -297,10 +298,11 @@ function render(){
   <div class="msgs" id="msgs">${L.map((m,i)=>{if(m.p&&m.them)return `<div class="row">${av(c,40)}<div><div class="nm">${c.n}</div><div class="m pc" style="align-self:flex-start">${pv(m.p)}<div class="c"><b>${m.p.u}</b> ${m.p.cap}</div></div></div></div>`;if(m.p)return `<div class="m pc">${pv(m.p)}<div class="c"><b>${m.p.u}</b> ${m.p.cap.slice(0,22)}…</div></div>`;
    if(m.f==="hr")return `<hr class="dv">`;
    if(m.f==="sys")return `<div class="m sys">${m.t}</div>`;
+   if(m.img)return `<div class="m ph" style="background-image:url(${asset(m.img)});background-size:cover;background-position:center">📷</div>`;
    if(m.f==="me")return `<div class="m me">${m.t}</div>`;
    const first=!L[i-1]||L[i-1].f!=="them";
    return `<div class="row">${first?av(c,40):'<div style="width:40px"></div>'}<div>${first?`<div class="nm">${c.n}</div>`:''}<div class="m them">${m.t}</div></div></div>`}).join("")}${S.busy[k]===1?`<div class="row">${av(c,40)}<div><div class="m them typing"><i></i><i></i><i></i></div></div></div>`:""}</div>
-  ${S.choice&&S.choice.k===k?`<div class="bar ch">${S.choice.opts.map((o,i)=>`<button onclick="pickChoice(${i})">${o.text}</button>`).join("")}</div>`:""}<div class="bar"${(S.choice&&S.choice.k===k)||S.hideBar===k?' style="display:none"':''}><input readonly placeholder="메시지 보내기…"><button onclick="daily('${k}')" ${S.busy[k]?'disabled style="opacity:.4"':''}>전송</button></div></div>`;}else if(v==="cp"){const k=S.pk,c=C[k],rel=REL[k],n=rel.length+1,nm=rel.map(x=>C[x].n),hp=S.hid[k]?HID[k]:null;
+  <div class="bar"${S.hideBar===k?' style="display:none"':''}><input readonly placeholder="메시지 보내기…"><button onclick="daily('${k}')" ${S.busy[k]?'disabled style="opacity:.4"':''}>전송</button></div>${S.choice&&S.choice.k===k?`<div class="bar ch">${S.choice.opts.map((o,i)=>`<button onclick="pickChoice(${i})">${o.text}</button>`).join("")}</div>`:""}</div>`;}else if(v==="cp"){const k=S.pk,c=C[k],rel=REL[k],n=rel.length+1,nm=rel.map(x=>C[x].n),hp=S.hid[k]?HID[k]:null;
   h=`<div class="chat cp"><header><button class="back" onclick="openChat('${k}')">‹</button><b style="flex:1;margin-left:6px">${EN[k]}</b><button class="mn" onclick="blockChar('${k}')">⋯</button></header>
   <main><div class="cp1">${av(c,84)}<div class="st"><div><b>${hp?1:0}</b>게시물</div><div><b>${n}</b>팔로워</div><div><b>${n}</b>팔로잉</div></div></div>
   <div class="cp2"><b>${c.n}</b></div>
@@ -342,7 +344,7 @@ function like(i){S.liked[i]=!S.liked[i];render()}
 function openSheet(i){if(P.find(x=>x.id===i).ns)return;S.sheet=i;render()}
 function closeSheet(){S.sheet=null;render()}
 let toastTimer=0;
-function toast(t){
+function toast(t,ms){
  S.toast=t;
  const show=()=>{
    let el=$.querySelector('.toast');
@@ -359,7 +361,7 @@ function toast(t){
    S.toast="";
    const el=$.querySelector('.toast');
    if(el)el.remove();
- },1500);
+ },ms||1500);
 }
 function updateDMIndicator(){
  const un=KV().reduce((a,k)=>a+S.un[k],0);
@@ -393,7 +395,7 @@ ribbon:'<svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><cir
 function hr(k){S.chat[k].push({f:"hr"});queueSave()}
 function say(k,s){const ps=s.split("|"),g=Math.max(900,S.set.delay*350);let at=0;ps.forEach((x,i)=>{let me=0;if(x[0]==="~")x=x.slice(1);else if(i)at+=g;if(x.startsWith("나:")){me=1;x=x.slice(2).trim()}setTimeout(()=>{if(me){S.ts[k]=Date.now();S.chat[k].push({f:"me",t:fmt(x)});if(S.view==="chat"&&S.cur===k)render()}else{S.act[k]=0;push(k,{f:"them",t:fmt(x)})}},at)});return at+g}
 function setOpt(k,v){S.set[k]=v;if(k==="theme")document.documentElement.dataset.theme=v;queueSave();render()}
-function resetGame(){S.aff=Z(()=>10);S.chat=Z(()=>[]);S.un=Z(()=>0);S.sent={};S.di=Z(()=>0);S.busy={};S.ts={};S.act={...ACT0};S.hid={};S.ev={};S.choice=null;S.last={};S.hist=Z(()=>[]);S.liked={};S.joined=0;S.jb=0;S.blocked={};S.pl={};S.dmTab="msg";saveGameState();toast('초기화했어요')}
+function resetGame(){S.aff=Z(()=>10);S.chat=Z(()=>[]);S.un=Z(()=>0);S.sent={};S.di=Z(()=>0);S.busy={};S.ts={};S.act={...ACT0};S.hid={};S.ev={};S.choice=null;S.last={};S.hist=Z(()=>[]);S.liked={};S.joined=0;S.jb=0;S.x={};S.blocked={};S.pl={};S.dmTab="msg";saveGameState();toast('초기화했어요')}
 function add(k,d){const o=S.aff[k];S.aff[k]=Math.max(0,Math.min(100,o+d));queueSave()}
 function openChat(k){S.view="chat";S.cur=k;S.un[k]=0;if(!S.chat[k].length&&C[k].hi){C[k].hi.split("|").forEach(x=>S.chat[k].push({f:"them",t:fmt(x)}));hr(k)}render();const e=pendEv(k,"in");if(e&&!S.busy[k])setTimeout(()=>runEv(k,e),700)}
 const DUP={d:"이건 아까 보냈잖아. ╭( •ㅂ•)૭",r:"??? 아까 보낸거잖아 ㅋㅋ 다른거 보여줘",l:"방금 봤던건데.|잘못 보낸거니?",c:"엣 {n}쨩 이거 아까 봤어요!|다른거 원해(˶> _ <˶)",s:"?? 경식|잘못 보낸거 같은데|이거 말고 다른거 보내줘요",x:"후후… 마녀, 너도 이런 실수를 할 때가 있군.|이건 방금 본 것이다.",k:"아|아;;;|중복 ㄴㄴ|다른거 없어?",i:"엣|{n}님|저 이거 이미 봤지롱 =v=",b:"아까 봤다|다른걸 가져오는 성의라도 보여봐"};
@@ -406,7 +408,8 @@ function share(pid,k,n=0){const p=P.find(x=>x.id===pid);S.sheet=null;
   const t=say(k,R[k][p.c]||R[k][sc>=3?'hi':sc<0?'lo':'mid']||R[k].mid||'…');
   setTimeout(()=>{hr(k);S.busy[k]=0;render()},t+200);
  },S.set.delay*1000)}
-function daily(k){if(S.busy[k])return;S.busy[k]=1;const l=C[k].daily,i=pick(k);S.ts[k]=Date.now();S.chat[k].push({f:"me",t:l[i][0]});render();
+const KN=["똑똑","세평?","일어났어요?","문씨?","알바중?"];
+function daily(k){if(S.busy[k])return;if(k==="s"&&S.x.s1t){const n=S.x.kn||0;S.x.kn=n+1;S.ts[k]=Date.now();S.chat[k].push({f:"me",t:KN[n%KN.length]});render();queueSave();return}S.busy[k]=1;const l=C[k].daily,i=pick(k);S.ts[k]=Date.now();S.chat[k].push({f:"me",t:l[i][0]});render();
  setTimeout(()=>{add(k,2);const t=say(k,l[i][1]);setTimeout(()=>{hr(k);S.busy[k]=0;render()},t)},S.set.delay*1000)}
 const PRE={s:["아 심심해|뭐해?","…갑자기 코드 하나 떠올랐는데|들려주고 싶네"],
 m:["야 {n} 밥은 먹었냐ㅋㅋ|나 지금 치킨 시켰는데|양 너무 많음 ㅋㅋ","어? 접속했네|롤 한 판 ㄱ?"],
@@ -426,11 +429,11 @@ x:{u:"dark_chronicle",e:"⚔️",g:"linear-gradient(135deg,#1a1a2e,#8e2de2)",t:"
 k:{u:"comma_room",e:"🖥️",g:"linear-gradient(135deg,#232526,#4b6cb7)",t:"새벽 4시 내 방",cap:"모니터 불빛만 켜진 방 #비공개",intro:"…이거 내 방|아무도 본 적 없어|그냥 보내봤어"}};
 const pickPre=k=>{const a=PRE[k],n=a.length;if(n<2)return a[0];const l=S.pl[k]==null?-1:S.pl[k],i=(l+1+(Math.random()*(n-1)|0))%n;S.pl[k]=i;return a[i]};
 function pick(k){const n=C[k].daily.length,h=S.hist[k],pool=[...Array(n).keys()].filter(i=>!h.slice(-2).includes(i)),i=pool[Math.random()*pool.length|0];h.push(i);return i}
-function tick(){const now=Date.now(),c=KV().filter(k=>!S.busy[k]&&!S.un[k]&&!(S.view==="chat"&&S.cur===k)&&now-(S.last[k]||0)>90000);
- if(c.length){const pool=c.filter(k=>pendEv(k,"pre")||(!S.hid[k]&&S.aff[k]>=50)),pp=pool.length?pool:c,k=pp[Math.random()*pp.length|0];S.last[k]=now;S.busy[k]=1;const ev=pendEv(k,"pre");
+function tick(){const now=Date.now(),c=KV().filter(k=>!S.busy[k]&&!S.un[k]&&!(k==="s"&&S.x.s1t)&&!(S.view==="chat"&&S.cur===k)&&now-(S.last[k]||0)>90000);
+ if(c.length){const pool=c.filter(k=>pendEv(k,"pre")||(!S.hid[k]&&S.aff[k]>=50&&!pendEv(k,"auto"))),pp=pool.length?pool:c,k=pp[Math.random()*pp.length|0];S.last[k]=now;S.busy[k]=1;const ev=pendEv(k,"pre");
     setTimeout(()=>{let t;
    if(ev){runEv(k,ev);toast("💬 "+C[k].n+": 새 메시지");return}
-   if(!S.hid[k]&&S.aff[k]>=50){S.hid[k]=1;t=say(k,HID[k].intro);setTimeout(()=>{push(k,{p:HID[k],them:1,hk:k});add(k,2);hr(k);S.busy[k]=0;render()},t)}
+   if(!S.hid[k]&&S.aff[k]>=50&&!pendEv(k,"auto")){S.hid[k]=1;t=say(k,HID[k].intro);setTimeout(()=>{push(k,{p:HID[k],them:1,hk:k});add(k,2);hr(k);S.busy[k]=0;render()},t)}
    else{t=say(k,pickPre(k));setTimeout(()=>{hr(k);S.busy[k]=0;render()},t)}
    toast("💬 "+C[k].n+": 새 메시지")},3000)}
  setTimeout(tick,15000+Math.random()*20000)}
@@ -476,11 +479,11 @@ PRE.i=["저… 최근에 감자튀김을 먹어봤어요…|너무 맛있다!! �
 HID.i={u:"sari_pari",e:"🌷",g:"linear-gradient(135deg,#d4fc79,#f6a6c1)",t:"이파리 근황",cap:"🌷",intro:"{n}님|이파리 기억하세요?|꽃 피웠지~ㅎㅎ|{n}님한테 꼭 보여드리고 싶었어요 'uu히"};
 EV.i=[{id:"i0",cond:0,mode:"in",name:"첫 인사",lines:[["them","저기"],["them","{n}님"],["them","저 기억하세요?"],["them","그때는"],["them","갑자기 사라져서 죄송했어요"],["them","지금 당장은 말 못 해 드리지만"],["them","그때는 진짜 감사했어요"],["them","덕분에 이렇게 {n}님이랑 다시 만났지 =v= 히"],["them","괜찮으시다면"],["them","계속 친구하고 싶은데"],["them","그래도 될까요?"],["them","되시겠지? 되실 거야!"],["me","네네"]]}];
 
-function pendEv(k,mode){return (EV[k]||[]).find(e=>e.mode===mode&&!S.ev[e.id]&&S.aff[k]>=e.cond)}
+function pendEv(k,mode){return (EV[k]||[]).find(e=>e.mode===mode&&!S.ev[e.id]&&S.aff[k]>=e.cond&&(!e.req||S.ev[e.req]))}
 function pickChoice(i){if(S.choice)S.choice.go(i)}
 function runEv(k,e){
  S.ev[e.id]=1;S.busy[k]=1;S.last[k]=Date.now();queueSave();
- const g=()=>Math.max(900,S.set.delay*350);
+ const g=()=>S.fixg||Math.max(900,S.set.delay*350);
  const play=(L,cb)=>{let i=0;const nx=()=>{
   if(i>=L.length)return cb();const [t,x]=L[i++];
   if(t==="them"){S.busy[k]=1;render();setTimeout(()=>{S.act[k]=0;push(k,{f:"them",t:fmt(x)});nx()},g())}
@@ -488,9 +491,70 @@ function runEv(k,e){
   else if(t==="aff"){add(k,x);nx()}
   else if(t==="wait"){setTimeout(nx,x*1000)}
   else if(t==="share"||t==="new"){const p=t==="share"?P.find(q=>q.id===x):EVP[x];if(!p)return nx();setTimeout(()=>{push(k,{p,them:1});nx()},g()*.7)}
-  else if(t==="choice"){S.busy[k]=2;S.choice={k,opts:x,go:n=>{const o=x[n];S.choice=null;S.ts[k]=Date.now();S.chat[k].push({f:"me",t:fmt(o.text)});if(o.aff)add(k,o.aff);S.busy[k]=1;render();setTimeout(()=>play(o.lines,nx),g()*.7)}};render()}
+  else if(t==="choice"){S.busy[k]=2;S.choice={k,opts:x,go:n=>{const o=x[n];S.choice=null;S.ts[k]=Date.now();if(o.text[0]!=="(")S.chat[k].push({f:"me",t:fmt(o.text)});if(o.aff)add(k,o.aff);S.busy[k]=1;render();setTimeout(()=>play(o.lines,nx),g()*.7)}};render()}
+  else if(t==="blink"){S.busy[k]=1;render();setTimeout(()=>{S.busy[k]=2;render();setTimeout(()=>{S.busy[k]=1;render();setTimeout(nx,1500)},700)},1500)}
+  else if(t==="dots"){S.busy[k]=1;render();setTimeout(nx,x*1000)}
+  else if(t==="speed"){S.fixg=x;nx()}
+  else if(t==="photo"){S.busy[k]=2;render();setTimeout(()=>{S.busy[k]=1;S.ts[k]=Date.now();S.chat[k].push({f:"me",img:x});render();nx()},g()*.7)}
+  else if(t==="toast"){toast(x,3500);nx()}
+  else if(t==="block"){blockByEv(k)}
   else nx()};nx()};
- play(e.lines,()=>{hr(k);S.busy[k]=0;render()})}
+ play(e.lines,()=>{hr(k);S.fixg=0;S.busy[k]=0;S.last[k]=Date.now();render();if(e.after)e.after(k)})}
+
+const T=s=>s.split("|").map(x=>["them",x]),M=s=>s.split("|").map(x=>["me",x]),EVPHOTO="images/33.jpg";
+function blockByEv(k){delete S.ev.s1;delete S.ev.s1b;S.x.s1t=0;S.fixg=0;S.aff[k]=10;doBlock(k)}
+EV.s=[
+{id:"s1",cond:30,mode:"auto",name:"취중진담",after:k=>{S.x.s1t=Date.now()+90000;S.x.kn=0;queueSave()},lines:[
+ ...T("경ㅇ식|ㅋㅋㅋㅎㅎㅋㅋㅋ|경싟ㅅ아|경식아ㅏ아아 잇냐"),
+ ...M("문씨 또 술?|줄였다고 하지 않았어요?"),
+ ...T("응ㅇ맞아|맞는데"),["blink"],
+ ...T("미안해요|지짜|진짜미안|맨날업보만쌓ㅎ고"),
+ ...T("{n}씨는|이런거 싫지"),
+ ...T("어떡ㄱ하지….|{n}씨한ㅇ테 미움받기 싫은데……."),
+ ...T("으ㅡ으음|나자꾸|찌질한 사람 되고싶어"),
+ ...M("알았구요|빨리 가서 주무세요"),
+ ...T("응ㅇ|미안해|진짜")]},
+{id:"s1b",cond:0,mode:"timer",name:"취중진담 후일담",lines:[
+ ...T("그|진짜 미안해요|주정 부린것도|디엠 씹은것도…..|내가 왜 그랬는지 모르겠어|{n}씨…?|{n}씨 나 차단한거 아니지"),
+ ["choice",[
+  {text:"(차단한다)",aff:0,lines:[["block"]]},
+  {text:"(버틴다)",aff:0,lines:M("차단 안했어요|문씨 이러는 거 하루이틀인가 ㅎ")}]],
+ ...T("ㅎ|ㅎㅎ|ㅎㅎㅎ….|미안|다시는 이런 일 없을거야"),["wait",3],...T("미안해요")]},
+{id:"s2",cond:45,mode:"auto",req:"s1b",name:"금주?",lines:[
+ ...M("그러고 보니|요즘은 술주정 별로 안하네요?"),
+ ...T("아……..|아|그거|아……"),
+ ...M("설마 진짜 금주?"),
+ ...T("약속했잖아|요|이런 일 없을거라고"),
+ ...T("그냥 뭐|{n}씨한테 실례인건 맞으니까|….넵."),
+ ["choice",[
+  {text:"(이유를 물어본다)",aff:0,lines:[...M("근데|그때는 왜 그랬어요?"),...T("그게|음|합주 끝나고 뒷풀이중이었는데|신나서 마시다보니까|ㅋㅋ|…|…|진짜 미안")]},
+  {text:"(주제를 돌린다)",aff:0,lines:[...M("근데|그때 말했던거 있잖아요"),...T("응?|그때?|??"),...M("찌질한 사람 되고싶다는게 무슨말이에요?"),...T("그|거는"),["blink"],...T("잊어줘요|별 거 아니야|진짜")]}]],
+ ...M("흠…|그건 그렇고 문씨|온더24에서 일하는거 맞죠?"),
+ ...T("응?|응 맞아|왜요?"),
+ ...M("흠|ㅋㅋ|암것도 아녜요"),
+ ...T("?"),
+ ...M("그럼 이만"),
+ ...T("경식아??"),
+ ...M("뿅"),
+ ...T("???")]},
+{id:"s3",cond:100,mode:"auto",req:"s2",name:"만남",lines:[
+ ["photo",EVPHOTO],
+ ["speed",1000],...T("?|아니|잠시만"),["speed",0],
+ ...T("이거 온더24잖아|???|{n}씨|장난이지?|다른 지점이지?"),
+ ...M("글쎄요|곧 알게 되겠죠|ㅎㅎ"),
+ ["speed",1000],...T("잠ㅁㅁ시만|잠시만|나아직준비가"),["speed",0],
+ ["dots",60],
+ ...T("{n}씨|죽순송이 안팔아|다 팔렸어"),
+ ...M("그렇군요|근데|왜 저를 앞에 두고 디엠으로 얘기하시는거죠"),
+ ...T("ㄱㅡ 건|너무 긴장이 돼서"),
+ ...M("우리 초면도 아니지 않나요|공연 끝나고는 잘만 왔으면서"),
+ ...T("…|이건|약간 달라|아무튼 그래"),
+ ...T("{n}씨 혹시|시간 되면"),["blink"],...T("잠깐만 나가서 기다려줄래요?"),
+ ...T("응 금방 따라 나갈 테니까"),
+ ...T("오늘은 꼭 하고싶은 말이 있어요"),
+ ["toast","문세평의 공략이 완료되었습니다."]]}];
+setInterval(()=>{if(S.choice)return;for(const k of KV()){if(S.busy[k])continue;const e=pendEv(k,"auto");if(e){if(!(S.view==="chat"&&S.cur===k))toast("💬 "+C[k].n+": 새 메시지");runEv(k,e);return}}
+ if(S.x.s1t&&Date.now()>=S.x.s1t&&!S.busy.s&&!S.blocked.s){S.x.s1t=0;queueSave();const e=EV.s.find(q=>q.id==="s1b");if(e){if(!(S.view==="chat"&&S.cur==="s"))toast("💬 문세평: 새 메시지");runEv("s",e)}}},1500);
 document.documentElement.dataset.theme=S.set.theme||"default";hydrateChats();render();
 (()=>{const sp=document.getElementById("splash"),off=()=>{if(!sp||sp.classList.contains("off"))return;sp.classList.add("off");setTimeout(()=>sp.remove(),700)};sp.onclick=off;setTimeout(off,2600)})();
 </script></body></html>
