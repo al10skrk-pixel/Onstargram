@@ -590,15 +590,21 @@ function stories(){const t=dkey();let st=S.sto;
  return vis()}
 function storyRow(){const L=stories();if(!L.length)return"";return `<div class="stories">${L.map(([k],n)=>`<div class="sti${S.sto.seen[k]?' seen':''}" onclick="openStory(${n})"><div class="rg">${av(C[k],58)}</div><span>${C[k].n}</span></div>`).join("")}</div>`}
 let SV=null;
-function openStory(n){const all=stories();if(!all[n])return;const L=[all[n]];closeStory(1);
+function openStory(n){const all=stories();if(!all[n])return;const L=all.slice();closeStory(1);
  const el=document.createElement("div");el.className="sv";document.body.appendChild(el);
- SV={L,n:0,el,t:0,paused:false,iv:0,ht:0};showStory();
+ SV={L,n,el,t:0,paused:false,iv:0,ht:0,dn:false};showStory();
  SV.iv=setInterval(()=>{if(!SV||SV.paused)return;SV.t+=50;const b=SV.el.querySelector(".pg.on i");if(b)b.style.width=Math.min(100,SV.t/50)+"%";if(SV.t>=5000)nextStory()},50)}
 function showStory(){const [k,i]=SV.L[SV.n],c=C[k];S.sto.seen[k]=1;queueSave();SV.t=0;SV.paused=false;
- SV.el.innerHTML=`<div class="svb" onpointerdown="svHold(1)" onpointerup="svHold(0)" onpointerleave="svHold(0)" onpointercancel="svHold(0)" oncontextmenu="return false"><div class="svf">${c.e}</div><div class="svi" style="background-image:url(${asset(stImg(k,i))})"></div>
- <div class="pgs">${SV.L.map((_,j)=>`<span class="pg${j===SV.n?' on':''}"><i style="width:${j<SV.n?100:0}%"></i></span>`).join("")}</div>
+ SV.el.innerHTML=`<div class="svb" onpointerdown="svHold(1)" onpointerup="svHold(0,event)" onpointerleave="svHold(0)" onpointercancel="svHold(0)" oncontextmenu="return false"><div class="svf">${c.e}</div><div class="svi" style="background-image:url(${asset(stImg(k,i))})"></div>
+ <div class="pgs"><span class="pg on"><i style="width:0%"></i></span></div>
  <div class="svh">${av(c,34)}<b>${c.n}</b><button onpointerdown="event.stopPropagation()" onclick="event.stopPropagation();closeStory()">✕</button></div></div>`}
-function svHold(on){if(!SV)return;clearTimeout(SV.ht);const b=SV.el.querySelector(".svb");if(on)SV.ht=setTimeout(()=>{if(!SV)return;SV.paused=true;b.classList.add("paused")},300);else{SV.paused=false;b.classList.remove("paused")}}
+function svHold(on,e){if(!SV)return;clearTimeout(SV.ht);const b=SV.el.querySelector(".svb");
+ if(on){SV.dn=true;SV.ht=setTimeout(()=>{if(!SV)return;SV.paused=true;b.classList.add("paused")},300);return}
+ const was=SV.paused,dn=SV.dn;SV.dn=false;SV.paused=false;b.classList.remove("paused");
+ if(!(e&&e.type==="pointerup")||was||!dn||e.target.closest("button"))return;
+ const r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width;
+ if(x<.35)prevStory();else if(x>.65)nextStory()}
+function prevStory(){if(!SV)return;if(SV.n>0)SV.n--;showStory()}
 function nextStory(){if(!SV)return;if(SV.n+1>=SV.L.length)closeStory();else{SV.n++;showStory()}}
 function closeStory(silent){if(!SV)return;clearInterval(SV.iv);clearTimeout(SV.ht);SV.el.remove();SV=null;if(!silent&&S.view==="feed")render()}
 setInterval(()=>{if(S.sto.d&&S.sto.d!==dkey()&&S.view==="feed"&&!SV)render()},30000);
