@@ -134,7 +134,7 @@ header .back{color:#fff;font-size:34px;line-height:1}
 /* ===== 릴스 댓글 ===== */
 .reel .side .cb{display:flex;flex-direction:column;align-items:center;gap:3px;color:#fff;font-size:12px;font-weight:600;text-shadow:0 1px 4px #0008}
 .toast{z-index:300}
-.cmw{position:fixed;left:0;right:0;top:0;height:100%;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.cmw{position:fixed;left:0;right:0;top:0;bottom:0;z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
 .cmbg{position:absolute;inset:0;background:#0000;transition:background .25s}
 .cmw.on .cmbg{background:#0007}
 .cms{position:relative;width:100%;max-width:480px;height:74dvh;max-height:calc(100% - 30px);background:var(--bg);color:var(--fg);border-radius:18px 18px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .28s cubic-bezier(.2,.8,.2,1);box-shadow:0 -4px 24px #0003}
@@ -763,6 +763,8 @@ function openCm(pid){const p=P.find(x=>x.id===pid);if(!p||CMEL)return;CM={pid,ex
  inp.addEventListener("input",()=>{pst.disabled=!inp.value.trim();cmMention()});
  ["click","keyup"].forEach(ev=>inp.addEventListener(ev,e=>{if(ev==="click"||/Arrow|Home|End/.test(e.key))cmMention()}));
  inp.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();cmPost()}});
+ inp.addEventListener("focus",()=>{cmFit();setTimeout(cmFit,300);setTimeout(cmFit,700)});
+ inp.addEventListener("blur",()=>{setTimeout(()=>{if(document.activeElement!==inp){window.scrollTo(0,0);cmFit()}},50);setTimeout(cmFit,400)});
  cmDrag(el.querySelector(".cmh"),el.querySelector(".cms"));
  cmDraw();cmFit();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("on")))}
 function closeCm(){if(!CMEL)return;const el=CMEL;CMEL=null;CM=null;el.classList.remove("on");const s=el.querySelector(".cms");s.classList.remove("drag");s.style.transform="";setTimeout(()=>el.remove(),280)}
@@ -771,8 +773,13 @@ function cmDrag(h,s){let y0=null,dy=0;
  h.addEventListener("pointermove",e=>{if(y0==null)return;dy=Math.max(0,e.clientY-y0);s.style.transform=`translateY(${dy}px)`});
  const up=()=>{if(y0==null)return;y0=null;s.classList.remove("drag");if(dy>110)closeCm();else s.style.transform=""};
  h.addEventListener("pointerup",up);h.addEventListener("pointercancel",up)}
-function cmFit(){const vv=window.visualViewport;if(!CMEL||!vv)return;CMEL.style.height=vv.height+"px";CMEL.style.top=vv.offsetTop+"px"}
+// iOS 사파리: 키보드가 실제로 떠 있을 때만 보이는 영역에 맞추고, 닫히면 화면 전체로 되돌림
+function cmFit(){if(!CMEL)return;const vv=window.visualViewport,inp=CMEL.querySelector("#cmin"),
+ kb=vv&&document.activeElement===inp&&(window.innerHeight-vv.height)>100;
+ if(kb){CMEL.style.top=vv.offsetTop+"px";CMEL.style.bottom="auto";CMEL.style.height=vv.height+"px"}
+ else{CMEL.style.top="0";CMEL.style.bottom="0";CMEL.style.height="auto"}}
 if(window.visualViewport){visualViewport.addEventListener("resize",cmFit);visualViewport.addEventListener("scroll",cmFit)}
+window.addEventListener("resize",cmFit);window.addEventListener("orientationchange",()=>setTimeout(cmFit,300));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&CMEL)closeCm()});
 function cmLike(id,only){if(only&&S.cl[id])return;S.cl[id]=!S.cl[id];if(!S.cl[id])delete S.cl[id];queueSave();cmDraw();
  if(S.cl[id]){const b=CMEL&&CMEL.querySelector(`[data-id="${id}"] .cmk`);if(b)b.classList.add("pop")}}
