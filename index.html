@@ -931,7 +931,7 @@ const NMZ='<div class="nmz">검색 결과가 없어요</div>';
 function nmList(){return KV().filter(k=>nmMatch(S.nmq,k)).map(k=>`<div class="nmr" onclick="openChat('${k}')">${av(C[k],52)}<div class="t"><b>${C[k].n}</b><div class="l">${EN[k]||""}</div></div></div>`).join("")||NMZ}
 function ngList(){const sel=S.ngsel||[];return KV().filter(k=>nmMatch(S.ngq,k)).map(k=>`<div class="nmr" onclick="ngToggle('${k}')">${av(C[k],52)}<div class="t"><b>${C[k].n}</b><div class="l">${EN[k]||""}</div></div><span class="chk${sel.includes(k)?" on":""}">${sel.includes(k)?"✓":""}</span></div>`).join("")||NMZ}
 function ngChips(){return (S.ngsel||[]).map(k=>`<span>${C[k].n}</span>`).join("")}
-function grpRow(g){const last=[...g.chat].reverse().find(m=>m.f!=="sys");
+function grpRow(g){const last=[...g.chat].reverse().find(m=>m.f==="me"||m.f==="them");
  return `<div class="dm" onclick="openGroup('${g.id}')"><div class="gav">${g.mem.slice(0,2).map(k=>av(C[k],36)).join("")}</div><div class="t"><b>${gName(g)}</b><div class="l">${last?cmEsc((last.f==="me"?"나: ":C[last.k].n+": ")+last.t):"멤버 "+(g.mem.length+1)+"명"}</div></div>${g.un?'<span class="gdot"></span>':""}</div>`}
 function grpView(v){const back=(fn,t)=>`<header class="nmh"><button class="back" onclick="${fn}">‹</button><b>${t}</b><span class="sp"></span></header>`;
  if(v==="nm")return `<div class="chat">${back("go('dm')","새 메시지")}<main><label class="nmto">받는이: <input id="nmq" placeholder="검색" autocomplete="off" value="${cmEsc(S.nmq||"")}" oninput="S.nmq=this.value;document.getElementById('nml').innerHTML=nmList()"></label>
@@ -943,7 +943,7 @@ function grpView(v){const back=(fn,t)=>`<header class="nmh"><button class="back"
   <div class="ngbar"><button id="ngb" onclick="ngCreate()" ${n<2?"disabled":""}>채팅 만들기${n?` (${n})`:""}</button></div></div>`}
  const g=S.groups.find(x=>x.id===S.gcur),L=g.chat,st=GB[g.id]||{},busy=S.gbusy===g.id||!!st.run;
  return `<div class="chat"><header><button class="back" onclick="go('dm')">‹</button><div style="display:flex;align-items:center;flex:1;gap:10px"><div class="gav" style="width:38px;height:38px">${g.mem.slice(0,2).map(k=>av(C[k],26)).join("")}</div><div style="line-height:1.25;min-width:0"><b>${gName(g)}</b><div style="font-size:11px">멤버 ${g.mem.length+1}명</div></div></div></header>
- <div class="msgs" id="msgs">${L.map((m,i)=>{if(m.f==="sys")return `<div class="m sys">${cmEsc(m.t)}</div>`;if(m.f==="me")return `<div class="m me">${cmEsc(m.t)}</div>`;
+ <div class="msgs" id="msgs">${L.map((m,i)=>{if(m.f==="hr")return `<hr class="dv">`;if(m.f==="sys")return `<div class="m sys">${cmEsc(m.t)}</div>`;if(m.f==="me")return `<div class="m me">${cmEsc(m.t)}</div>`;
   const c=C[m.k],first=!L[i-1]||L[i-1].k!==m.k||L[i-1].f!=="them";
   return `<div class="row">${first?av(c,40):'<div style="width:40px"></div>'}<div>${first?`<div class="nm">${c.n}</div>`:""}<div class="m them">${cmEsc(m.t)}</div></div></div>`}).join("")}${st.b===1&&st.who?`<div class="row">${av(C[st.who],40)}<div><div class="nm">${C[st.who].n}</div><div class="m them typing"><i></i><i></i><i></i></div></div></div>`:""}</div>
  <div class="bar"><input readonly placeholder="메시지 보내기…"><button onclick="grpDaily('${g.id}')" ${busy?'disabled style="opacity:.4"':""}>전송</button></div>${st.ch?`<div class="bar ch">${st.ch.opts.map((o,i)=>`<button onclick="grpPick('${g.id}',${i})">${o.text}</button>`).join("")}</div>`:""}</div>`}
@@ -1074,13 +1074,13 @@ function gPush(g,m,st){g.chat.push(m);g.ts=Date.now();queueSave();
  if(S.view==="gc"&&S.gcur===g.id){render();return}
  if(m.f==="them"){g.un=(g.un||0)+1;updateDMIndicator();if(S.view==="dm")render();
   if(!st.noted){st.noted=1;toast("💬 "+(g.name||g.mem.map(x=>C[x].n).join(", "))+": 새 메시지")}}}
-function gPlay(g,lines,cb,tries=0){const st=GB[g.id]||(GB[g.id]={b:0});
- if(st.run){if(tries<90)setTimeout(()=>gPlay(g,lines,cb,tries+1),2000);return}
- st.run=1;st.noted=0;let L=lines.slice(),i=0,fix=0;const gap=()=>fix||Math.max(900,S.set.delay*350);
+function gPlay(g,lines,cb,o={}){const st=GB[g.id]||(GB[g.id]={b:0}),tries=o.tries||0;
+ if(st.run){if(tries<90)setTimeout(()=>gPlay(g,lines,cb,{...o,tries:tries+1}),2000);return}
+ st.run=1;st.noted=0;const n0=g.chat.length;let L=lines.slice(),i=0,fix=0;const gap=()=>fix||Math.max(900,S.set.delay*350);
  const view=()=>{if(S.view==="gc"&&S.gcur===g.id)render()};
  const set=(b,who)=>{st.b=b;st.who=who;view()};
  const nx=()=>{if(!S.groups.includes(g)){st.run=0;return}
-  if(i>=L.length){st.run=0;set(0);if(cb)cb();return}
+  if(i>=L.length){st.run=0;const lt=g.chat[g.chat.length-1];if(!o.nohr&&g.chat.length>n0&&lt&&lt.f!=="hr"){g.chat.push({f:"hr"});queueSave()}set(0);if(cb)cb();return}
   const [t,a,b]=L[i++];
   if(t==="t"){set(1,a);setTimeout(()=>{set(3);gPush(g,{f:"them",k:a,t:fmt(b)},st);nx()},gap())}
   else if(t==="m"){set(2);setTimeout(()=>{gPush(g,{f:"me",t:fmt(a)},st);nx()},gap()*.7)}
@@ -1103,7 +1103,7 @@ function grpDaily(id){const g=S.groups.find(x=>x.id===id),sc=g&&GS[g.key];if(!sc
 function gTick(){const now=Date.now(),kv=KV();
  const c=S.groups.filter(g=>!g.tmp&&g.started&&GS[g.key]&&GS[g.key].pre.length&&!(GB[g.id]&&GB[g.id].run)&&g.pend==null&&g.mem.every(k=>kv.includes(k))&&now-(g.lp||0)>180000&&!(S.view==="gc"&&S.gcur===g.id));
  if(c.length&&Math.random()<.6){const g=c[Math.random()*c.length|0],PR=GS[g.key].pre;let i=Math.random()*PR.length|0;if(PR.length>1&&i===g.lpi)i=(i+1)%PR.length;g.lpi=i;g.lp=now;
-  gPlay(g,PR[i].lines,()=>{if(!PR[i].after)return;if(S.view==="gc"&&S.gcur===g.id)setTimeout(()=>gPlay(g,PR[i].after),1200);else{g.pend=i;queueSave()}})}
+  gPlay(g,PR[i].lines,()=>{if(!PR[i].after)return;if(S.view==="gc"&&S.gcur===g.id)setTimeout(()=>gPlay(g,PR[i].after),1200);else{g.pend=i;queueSave()}},{nohr:!!PR[i].after})}
  setTimeout(gTick,40000+Math.random()*40000)}
 setTimeout(gTick,30000);
 
